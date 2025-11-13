@@ -1,15 +1,30 @@
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import type { Route } from "next";
+import Image from "next/image";
 
 
 export default function Footer() {
   return (
-    <footer className="border-t bg-white mt-12">
-      <div className="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8 text-sm text-gray-600">
+    <footer className="border-t bg-white ">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid md:grid-cols-3 gap-8 text-sm text-gray-600">
         {/* About */}
         <div>
-          <h3 className="font-semibold text-gray-900 text-lg">Practivoo Shop</h3>
+          {/* <h3 className="font-semibold text-gray-900 text-lg">Export Now</h3> */}
+          {/* Logo */}
+                    <Link 
+                      href="/" 
+                      className="flex items-center space-x-3 group"
+                    >
+                      <div className="flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-600 to-sky-700 text-white shadow-sm group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                        {/* <span className="text-lg font-bold">ES</span> */}
+                        <Image src={"/logo.png"} width={200} height={200} alt='logo' className="rounded-full" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-xl font-bold text-gray-900">Export</span>
+                        <span className="text-md text-gray-500 -mt-1 font-medium">Now</span>
+                      </div>
+                    </Link>
           <p className="mt-2">
             Eco-friendly and sustainable product catalog with both retail and
             wholesale pricing. Built for transparency and ease of enquiry.
@@ -44,7 +59,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t py-4 text-center text-xs text-gray-500 bg-gray-50">
-        © {new Date().getFullYear()} Practivoo Shop. All rights reserved.
+        © {new Date().getFullYear()} Export Now. All rights reserved.
       </div>
     </footer>
   );

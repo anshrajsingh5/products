@@ -3,47 +3,75 @@
 import Link from "next/link";
 import type { Route } from "next";
 import { usePathname } from "next/navigation";
+import LogoutButton from "@/components/LogoutButton";
 
 const items: { href: Route; label: string }[] = [
   { label: "Products", href: "/admin/products" },
   { label: "Enquiries", href: "/admin/enquiries" },
 ];
 
-export default function AdminNav() {
+async function fetchEnquiries() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/enquiries`, { 
+    cache: "no-store",
+    next: { revalidate: 0 }
+  });
+  if (!res.ok) throw new Error('Failed to fetch enquiries');
+  return res.json();
+}
+
+export default async function AdminNav() {
   const pathname = usePathname();
+    let enquiries = [];
+  try {
+    enquiries = await fetchEnquiries();
+  } catch (error) {
+    console.error('Error fetching enquiries:', error);
+  }
 
   return (
-    <header className="border-b bg-white shadow-sm">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-        <Link href="/admin/products" className="font-semibold text-lg text-gray-700">
-          🛍️ Admin Panel
-        </Link>
-
-        <nav className="flex gap-3">
-          {items.map((i) => (
-            <Link
-              key={i.href}
-              href={i.href}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                pathname.startsWith(i.href)
-                  ? "bg-blue-100 text-blue-700"
-                  : "text-gray-600 hover:bg-gray-100"
-              }`}
-            >
-              {i.label}
-            </Link>
-          ))}
-        </nav>
-
-        <form action="/api/logout" method="post">
-          <button
-            type="submit"
-            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-          >
-            Logout
-          </button>
-        </form>
+   
+<div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center space-x-4">
+              <Link href="/admin" className="flex items-center space-x-3 group">
+                <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-sky-600 to-sky-700 text-white shadow-lg">
+                  <span className="text-lg font-bold">A</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xl font-bold text-gray-900">Admin</span>
+                  <span className="text-xs text-gray-500 -mt-1">Panel</span>
+                </div>
+              </Link>
+              
+              <nav className="hidden md:flex items-center space-x-1 ml-8">
+                {[
+                  { href: '/admin/products', label: 'Products' },
+                  { href: '/admin/enquiries', label: 'Enquiries' },
+                ].map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                      link.href === '/admin/enquiries'
+                        ? 'text-sky-600 bg-sky-50'
+                        : 'text-gray-700 hover:text-sky-600 hover:bg-gray-100'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <div className="text-sm text-gray-600 hidden sm:block">
+                {enquiries.length} total leads
+              </div>
+              <LogoutButton />
+            </div>
+          </div>
+        </div>
       </div>
-    </header>
   );
 }

@@ -3,7 +3,7 @@ import React from "react";
 import AdminNav from "./components/AdminNav";
 
 export const metadata = {
-  title: "Admin | Practivoo Shop",
+  title: "Admin",
 };
 
 export default function AdminLayout({
@@ -14,12 +14,12 @@ export default function AdminLayout({
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Top Navbar */}
-      <AdminNav />
+      {/* <AdminNav /> */}
 
       {/* Main content area */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      {/* <div className="max-w-6xl mx-auto px-4 py-8"> */}
         {children}
-      </div>
+      {/* </div> */}
     </div>
   );
 }
