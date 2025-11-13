@@ -62,7 +62,7 @@ export default async function AdminNav() {
                     }`}
                   >
                     {link.label}
-                  </>
+                  </a>
                 ))}
               </nav>
             </div>
