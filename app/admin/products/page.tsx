@@ -22,7 +22,7 @@ export default function AdminProductsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              <Link href="/admin" className="flex items-center space-x-3 group">
+              <a href="/admin" className="flex items-center space-x-3 group">
                 <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-sky-600 to-sky-700 text-white shadow-lg">
                   <span className="text-lg font-bold">A</span>
                 </div>
@@ -30,14 +30,14 @@ export default function AdminProductsPage() {
                   <span className="text-xl font-bold text-gray-900">Admin</span>
                   <span className="text-xs text-gray-500 -mt-1">Panel</span>
                 </div>
-              </Link>
+              </a>
               
               <nav className="hidden md:flex items-center space-x-1 ml-8">
                 {[
                   { href: '/admin/products', label: 'Products' },
                   { href: '/admin/enquiries', label: 'Enquiries' },
                 ].map((link) => (
-                  <Link
+                  <a
                     key={link.href}
                     href={link.href}
                     className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
@@ -47,7 +47,7 @@ export default function AdminProductsPage() {
                     }`}
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 ))}
               </nav>
             </div>

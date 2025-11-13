@@ -51,7 +51,7 @@ export default function CategoriesSection() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category, index) => (
-            <Link
+            <a
               key={category.name}
               href={category.href}
               className="group"
@@ -75,7 +75,7 @@ export default function CategoriesSection() {
                   </svg>
                 </div>
               </div>
-            </Link>
+            </a>
           ))}
         </div>
       </div>
